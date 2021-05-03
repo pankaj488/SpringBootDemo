@@ -25,11 +25,14 @@ import com.pankaj.service.AsyncService;
 
 @RestController
 @RequestMapping("/async")
+// https://www.thetechnojournals.com/2019/10/asynchronous-rest-service.html
+
 public class AsyncController {
 	private static Logger log = LoggerFactory.getLogger(AsyncController.class);
 	@Autowired
 	private AsyncService asyncService;
 
+	@SuppressWarnings("unchecked")
 	@GetMapping(path = "/testAsync", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity testAsync() throws InterruptedException, ExecutionException {
 		log.info("Start testAsync");
