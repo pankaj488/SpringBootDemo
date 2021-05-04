@@ -60,10 +60,22 @@ public class AsyncService {
         log.info("getEmployeePhone starts");
  
         EmployeePhone employeePhoneData = restTemplate.getForObject("http://localhost:2025/phones", EmployeePhone.class);
- 
+       
         log.info("employeePhoneData, {}", employeePhoneData);
         Thread.sleep(1000L);    //Intentional delay
         log.info("employeePhoneData completed");
+        return CompletableFuture.completedFuture(employeePhoneData);
+    }
+    @Async("asyncExecutor")
+    public CompletableFuture<EmployeePhone> getEmployeePhone1() throws InterruptedException 
+    {
+        log.info("getEmployeePhone1 starts");
+ 
+        EmployeePhone employeePhoneData = restTemplate.getForObject("http://localhost:2025/phones", EmployeePhone.class);
+       
+        log.info("employeePhoneData1, {}", employeePhoneData);
+        Thread.sleep(1000L);    //Intentional delay
+        log.info("employeePhoneData1 completed");
         return CompletableFuture.completedFuture(employeePhoneData);
     }
 }

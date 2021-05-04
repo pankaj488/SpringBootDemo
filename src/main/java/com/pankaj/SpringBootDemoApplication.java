@@ -35,7 +35,6 @@ public class SpringBootDemoApplication {
 	 */
 	@Bean(name = "asyncExecutor")
 	public ThreadPoolTaskExecutor asyncExecutor() {
-		ExecutorService executorService = Executors.newCachedThreadPool();
 		ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 		threadPoolTaskExecutor.setCorePoolSize(3);
 		threadPoolTaskExecutor.setMaxPoolSize(3);
@@ -64,6 +63,9 @@ public class SpringBootDemoApplication {
 		nameList.add("Ansh");
 		nameList.add("Sachin");
 		nameList.add("Priyanka");
+		
+	
+		
 		return nameList;
 	}
 
