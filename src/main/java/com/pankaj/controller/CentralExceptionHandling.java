@@ -7,12 +7,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class CentralExceptionHandling {
-	/*
-	 * @ExceptionHandler(value = Exception.class) public ResponseEntity<String>
-	 * errorcallingThirdParty() { return new
-	 * ResponseEntity<>("List can not be loaded due to third party down",HttpStatus.
-	 * INTERNAL_SERVER_ERROR ); }
-	 */
+	
+	@ExceptionHandler(value = Exception.class)
+	public ResponseEntity<String> errorcallingThirdParty() {
+		return new ResponseEntity<>("List can not be loaded due to third party down", HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	 
 //	@Primary
 	//@ExceptionHandler(value = Exception.class) 
 	public ResponseEntity<String> exceptionAsync() {

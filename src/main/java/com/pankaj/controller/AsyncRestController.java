@@ -4,14 +4,18 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.context.request.async.WebAsyncTask;
 
+import com.pankaj.repository.Teacher;
+import com.pankaj.repository.TeacherRepository;
 import com.pankaj.service.CallableTask;
 
 /**
@@ -23,6 +27,8 @@ import com.pankaj.service.CallableTask;
 @RestController
 @RequestMapping("/asyncAPI")
 public class AsyncRestController {
+	@Autowired
+	TeacherRepository teacherRepository;
 	@GetMapping
 	@RequestMapping(path = "/executeAsync")
 	public WebAsyncTask<String> executeAsync(
@@ -31,6 +37,15 @@ public class AsyncRestController {
 				"Service started::  Thread name which is calling endpoint :: " + Thread.currentThread().getName());
 		CallableTask callable = new CallableTask(username);
 		WebAsyncTask<String> webAsyncTask = new WebAsyncTask<>(20000, callable);
+		Teacher teacher = new Teacher();
+		Optional<Teacher> optionalTeacher =  teacherRepository.findById(new Long(1));
+		if (optionalTeacher.isPresent()) {
+			teacherRepository.save(optionalTeacher.get());
+			
+		}
+		
+		//teacherRepository.delete(teacher);
+	//	System.out.println("XXXXXXXXXXXXXXXXXXXXX::: "+teacherRepository.testQuery(new Long(1)));
 		webAsyncTask.onTimeout(() -> {
 			System.out.println("onTimeout...");
 			return "Request timed out...";
