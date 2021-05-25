@@ -35,6 +35,7 @@ public class SpringBootDemoApplication {
 	 */
 	@Bean(name = "asyncExecutor")
 	public ThreadPoolTaskExecutor asyncExecutor() {
+		
 		ThreadPoolTaskExecutor threadPoolTaskExecutor = new ThreadPoolTaskExecutor();
 		threadPoolTaskExecutor.setCorePoolSize(3);
 		threadPoolTaskExecutor.setMaxPoolSize(3);
