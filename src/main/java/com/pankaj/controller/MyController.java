@@ -28,6 +28,13 @@ public class MyController {
 	@Autowired
 	@Qualifier("nameListMembers")
 	List<String> nameList1;
+	
+	@GetMapping(path = "/hello")
+	public String hello() {
+		return "Hello !! I am azure";
+		
+	}
+	
 	@GetMapping(path = "/ping")
 	public String ping() throws Exception {
 		//return "Working !!";
