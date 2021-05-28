@@ -27,38 +27,35 @@ import com.pankaj.service.CallableTask;
 @RestController
 @RequestMapping("/asyncAPI")
 public class AsyncRestController {
-	@Autowired
-	TeacherRepository teacherRepository;
-	@GetMapping
-	@RequestMapping(path = "/executeAsync")
-	public WebAsyncTask<String> executeAsync(
-			@RequestParam(name = "username", defaultValue = "ORFI") final String username) {
-		System.out.println(
-				"Service started::  Thread name which is calling endpoint :: " + Thread.currentThread().getName());
-		CallableTask callable = new CallableTask(username);
-		WebAsyncTask<String> webAsyncTask = new WebAsyncTask<>(20000, callable);
-		Teacher teacher = new Teacher();
-		Optional<Teacher> optionalTeacher =  teacherRepository.findById(new Long(1));
-		if (optionalTeacher.isPresent()) {
-			teacherRepository.save(optionalTeacher.get());
-			
-		}
-		
-		//teacherRepository.delete(teacher);
-	//	System.out.println("XXXXXXXXXXXXXXXXXXXXX::: "+teacherRepository.testQuery(new Long(1)));
-		webAsyncTask.onTimeout(() -> {
-			System.out.println("onTimeout...");
-			return "Request timed out...";
-		});
-		webAsyncTask.onError(() -> {
-			System.out.println("onError...");
-			return "Some error occurred...";
-		});
-		webAsyncTask.onCompletion(() -> {
-			System.out.println("onCompletion...");
-		});
-		return webAsyncTask;
-	}
+	/*
+	 * @Autowired TeacherRepository teacherRepository;
+	 */
+	/*
+	 * @GetMapping
+	 * 
+	 * @RequestMapping(path = "/executeAsync") public WebAsyncTask<String>
+	 * executeAsync(
+	 * 
+	 * @RequestParam(name = "username", defaultValue = "ORFI") final String
+	 * username) { System.out.println(
+	 * "Service started::  Thread name which is calling endpoint :: " +
+	 * Thread.currentThread().getName()); CallableTask callable = new
+	 * CallableTask(username); WebAsyncTask<String> webAsyncTask = new
+	 * WebAsyncTask<>(20000, callable); Teacher teacher = new Teacher();
+	 * Optional<Teacher> optionalTeacher = teacherRepository.findById(new Long(1));
+	 * if (optionalTeacher.isPresent()) {
+	 * teacherRepository.save(optionalTeacher.get());
+	 * 
+	 * }
+	 * 
+	 * //teacherRepository.delete(teacher); //
+	 * System.out.println("XXXXXXXXXXXXXXXXXXXXX::: "+teacherRepository.testQuery(
+	 * new Long(1))); webAsyncTask.onTimeout(() -> {
+	 * System.out.println("onTimeout..."); return "Request timed out..."; });
+	 * webAsyncTask.onError(() -> { System.out.println("onError..."); return
+	 * "Some error occurred..."; }); webAsyncTask.onCompletion(() -> {
+	 * System.out.println("onCompletion..."); }); return webAsyncTask; }
+	 */
 
 	@GetMapping("/r1")
 	public Map<String, String> r1() {
